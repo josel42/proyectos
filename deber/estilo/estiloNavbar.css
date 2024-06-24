@@ -1,0 +1,69 @@
+body {
+    background-image: url(../img/fondoblue.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    margin-left: 70px; /* Ancho del navbar cuando está reducido */
+}
+
+h1 {
+    font-family: 'Playfair Display', serif; /* Establecer la fuente Playfair Display */
+    font-weight: bold; /* Establecer negrilla */
+}
+
+h2 {
+    font-family: 'Inconsolata', monospace; /* Establecer la fuente Inconsolata */
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 70px; /* Ancho reducido */
+    background-color: #333; /* Cambio de color de fondo */
+    color: #fff; /* Cambio de color de texto */
+    z-index: 1030; /* Asegurar que esté por encima del contenido */
+    transition: width 0.3s; /* Agregar transición para animación */
+}
+.sidebar:hover {
+    width: 250px; /* Ancho expandido al pasar el mouse */
+}
+.profile {
+    margin-top: auto;
+}
+.nav-link {
+    color: #ccc; /* Cambio de color de texto */
+    white-space: nowrap; /* Evitar que el texto se divida en varias líneas */
+    overflow: hidden; /* Ocultar el texto que sobresale */
+    text-overflow: ellipsis; /* Agregar puntos suspensivos al texto que sobresale */
+    transition: all 0.3s; /* Agregar transición para animación */
+}
+.sidebar:hover .nav-link {
+    overflow: visible; /* Mostrar el texto cuando el navbar está expandido */
+    text-overflow: initial; /* Mostrar el texto completo cuando el navbar está expandido */
+    width: 180px; /* Ajustar el ancho del texto cuando el navbar está expandido */
+}
+.nav-link .expanded-text {
+    display: none; /* Ocultar el texto por defecto */
+}
+.sidebar:hover .nav-link .expanded-text {
+    display: inline; /* Mostrar el texto cuando el navbar está expandido */
+}
+.nav-link:hover {
+    color: #0d6efd; /* Cambio de color de texto al pasar el mouse */
+    background-color: #555; /* Cambio de color de fondo al pasar el mouse */
+}
+.sidebar-sticky {
+    padding-top: 20px; /* Añadir espacio superior */
+}
+.nav-item {
+    padding: 10px 0; /* Ajustar el espacio entre elementos */
+}
+.nav-item:hover .nav-link .bi {
+    color: #0d6efd; /* Cambio de color del icono al pasar el mouse */
+}
+.nav-link .bi {
+    margin-right: 10px; /* Añadir margen a los iconos */
+}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de Sesión</title>
+    <link rel="shortcut icon" href="img/logoS.png">
+    <link rel="stylesheet" href="estilos/estilo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <h2>Bienvenido a Nuestra Página de Ferretería</h2>
+
+    <div id="message" class="message"></div>
+
+    <div class="container" id="container">
+        <div class="form-container sign-up-container">
+            <form id="signUpForm" action="controllers/crear_cuenta.php" method="post" enctype="multipart/form-data">
+                <h1>Crear Cuenta</h1>
+                <div class="social-container">
+                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social"><i class="fab fa-whatsapp"></i></a>
+                </div>
+                <input type="text" name="nombre" placeholder="Nombre" required />
+                <input type="email" name="correo" placeholder="Correo Electrónico" required />
+                <input type="password" id="contraseña" name="contraseña" placeholder="Contraseña" required />
+                <input type="password" id="confirmar_contraseña" name="confirmar_contraseña" placeholder="Confirmar Contraseña" required />
+                <label for="foto">Foto de Perfil</label>
+                <input type="file" name="foto" required />
+                <button type="submit">Registrarse</button>
+            </form>
+        </div>
+        <div class="form-container sign-in-container">
+            <form action="controllers/login.php" method="post">
+                <h1>Iniciar Sesión</h1>
+                <div class="social-container">
+                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social"><i class="fab fa-whatsapp"></i></a>
+                </div>
+                <span>o usa tu cuenta</span>
+                <input type="email" name="correo" placeholder="Correo Electrónico" required />
+                <input type="password" name="contraseña" placeholder="Contraseña" required />
+                <a href="olvido.php">¿Olvidaste tu contraseña?</a>
+                <button type="submit">Iniciar Sesión</button>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>¡Bienvenido de Nuevo!</h1>
+                    <p>Para mantenerte conectado con nosotros, por favor inicia sesión con tu información personal</p>
+                    <button class="ghost" id="signIn">Iniciar Sesión</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>¡Hola, Amigo!</h1>
+                    <p>Introduce tus datos personales y comienza tu viaje con nosotros</p>
+                    <button class="ghost" id="signUp">Registrarse</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>
+            Creado con <i class="fa fa-heart"></i> por
+            <a target="_blank" href="https://florin-pop.com">Nuestro Equipo</a>
+        </p>
+    </footer>
+    <script src="scripts/scriptLogin.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const messageDiv = document.getElementById('message');
+
+            if (urlParams.has('success')) {
+                messageDiv.innerHTML = '<p class="success">Cuenta creada exitosamente.</p>';
+                messageDiv.style.display = 'block';
+            } else if (urlParams.has('error')) {
+                if (urlParams.get('error') === 'correo_existente') {
+                    messageDiv.innerHTML = '<p class="error">El correo electrónico ya está registrado.</p>';
+                } else if (urlParams.get('error') === 'error_creacion') {
+                    messageDiv.innerHTML = '<p class="error">Hubo un error al crear la cuenta. Por favor, inténtalo de nuevo.</p>';
+                } else if (urlParams.get('error') === 'contraseñas_no_coinciden') {
+                    messageDiv.innerHTML = '<p class="error">Las contraseñas no coinciden. Por favor, inténtalo de nuevo.</p>';
+                } else if (urlParams.get('error') === 'contraseña_incorrecta') {
+                    messageDiv.innerHTML = '<p class="error">La contraseña es incorrecta. Por favor, inténtalo de nuevo.</p>';
+                } else if (urlParams.get('error') === 'correo_no_registrado') {
+                    messageDiv.innerHTML = '<p class="error">El correo electrónico no está registrado. Por favor, inténtalo de nuevo.</p>';
+                }
+                messageDiv.style.display = 'block';
+            }
+
+            // Verificación de contraseña
+            const signUpForm = document.getElementById('signUpForm');
+            signUpForm.addEventListener('submit', function(event) {
+                const contraseña = document.getElementById('contraseña').value;
+                const confirmarContraseña = document.getElementById('confirmar_contraseña').value;
+                
+                if (contraseña !== confirmarContraseña) {
+                    event.preventDefault();
+                    messageDiv.innerHTML = '<p class="error">Las contraseñas no coinciden. Por favor, inténtalo de nuevo.</p>';
+                    messageDiv.style.display = 'block';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
